@@ -87,11 +87,13 @@ body {
 }
 
 /* GRIGLIA DI SCHEDE */
-#classiche, #bianche {
+.menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
+  margin-top: 2rem;
 }
+
 
 /* SCHEDA DELLA PIZZA */
 .menu-item {
@@ -142,7 +144,15 @@ body {
     flex-direction: column;
     gap: 0.5rem;
   }
+
+  /* Mantiene 2 colonne anche su mobile */
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .menu-item {
     padding: 1.2rem;
   }
 }
+
+
