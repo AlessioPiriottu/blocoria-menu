@@ -99,18 +99,6 @@ body {
   color: #c0392b;
 }
 
-/* Ombre laterali decorative (pseudo-elementi) */
-.menu-nav::before,
-.menu-nav::after {
-  content: "";
-  position: absolute;       /* absolute dentro .menu-nav (che è relativo/sticky) */
-  top: 0;
-  height: 100%;
-  width: 28px;
-  pointer-events: none;
-  z-index: 998;
-}
-
 .menu-nav::before {
   left: 0;
   background: linear-gradient(to right, rgba(255,255,255,1) 10%, rgba(255,255,255,0));
