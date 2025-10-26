@@ -33,28 +33,59 @@ body {
   color: #555;
 }
 
-/* NAVBAR - stile tab orizzontali */
+/* NAVBAR - orizzontale scrollabile con tab */
 .menu-nav {
-  background: #fff;
-  padding: 0.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   position: sticky;
   top: 0;
   z-index: 10;
-  display: flex;
-  justify-content: center;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+
+/* Nasconde la scrollbar */
+.menu-nav::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ombre laterali decorative */
+.menu-nav::before,
+.menu-nav::after {
+  content: "";
+  position: sticky;
+  top: 0;
+  width: 30px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.menu-nav::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255,255,255,1) 10%, rgba(255,255,255,0));
+}
+
+.menu-nav::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255,255,255,1) 10%, rgba(255,255,255,0));
+}
+
 
 .menu-nav ul {
   display: flex;
-  list-style: none;
+  flex-wrap: nowrap;          /* impedisce di andare a capo */
   gap: 1rem;
+  list-style: none;
+  padding: 0.8rem 1rem;
+  margin: 0;
   border-bottom: 3px solid #f0d4a1;
-  padding: 0.5rem 1rem;
+  justify-content: flex-start;
 }
 
 .menu-nav li {
-  margin: 0;
+  flex: 0 0 auto;             /* ogni tab mantiene la sua larghezza */
 }
 
 .menu-nav a {
@@ -67,40 +98,16 @@ body {
   color: #c0392b;
   font-weight: 600;
   transition: all 0.3s ease;
+  white-space: nowrap;        /* impedisce il ritorno a capo */
 }
 
-/* Effetto hover e "tab" attivo */
+/* Effetto hover e attivo */
 .menu-nav a:hover {
   background: #f9e0b4;
   border-color: #e7c48f;
   color: #2c3e50;
 }
 
-.menu-nav a:active,
-.menu-nav a:focus {
-  background: #fff7e6;
-  border-color: #c0392b;
-  color: #c0392b;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .menu-nav {
-    overflow-x: auto;
-    justify-content: flex-start;
-  }
-
-  .menu-nav ul {
-    flex-wrap: nowrap;
-    gap: 0.5rem;
-  }
-
-  .menu-nav a {
-    white-space: nowrap;
-  }
-}
-
-/* Tab attiva */
 .menu-nav a.active {
   background: #fff7e6;
   border-color: #c0392b;
@@ -205,4 +212,8 @@ body {
   }
 }
 
+/* Evita che il titolo di sezione venga coperto dalla navbar sticky */
+section {
+  scroll-margin-top: 90px; /* altezza della navbar + un po' di spazio */
+}
 
