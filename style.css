@@ -33,33 +33,82 @@ body {
   color: #555;
 }
 
-/* NAVBAR - orizzontale scrollabile con tab */
+/* =========================
+   NAVBAR SCORRIBILE - definitivo
+   ========================= */
 .menu-nav {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 999;
   background: #fff;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  overflow-x: auto;                 /* scroll orizzontale */
+  overflow-y: hidden;               /* niente scroll verticale */
+  -webkit-overflow-scrolling: touch; /* scroll fluido su iOS */
+  scrollbar-width: none;            /* Firefox - nasconde scrollbar */
+  -ms-overflow-style: none;         /* IE/Edge legacy */
+  white-space: nowrap;              /* evita il wrap a capo */
+  /* rendiamo la navbar contenitore relativo per pseudo-elementi */
 }
 
-/* Nasconde la scrollbar */
+/* Nasconde la scrollbar sui WebKit */
 .menu-nav::-webkit-scrollbar {
   display: none;
 }
 
-/* Ombre laterali decorative */
+/* Contenitore interno delle tab */
+.menu-nav ul {
+  display: flex;
+  flex-wrap: nowrap;         /* MAI andare a capo */
+  gap: 1rem;
+  list-style: none;
+  padding: 0.6rem 1rem;
+  margin: 0;
+  align-items: center;
+  justify-content: flex-start; /* parte da sinistra, scrollabile */
+}
+
+/* Singola tab */
+.menu-nav li {
+  flex: 0 0 auto;           /* ognuna mantiene la propria larghezza */
+}
+
+/* Stile link (tab) */
+.menu-nav a {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 8px 8px 0 0;
+  text-decoration: none;
+  color: #c0392b;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;      /* testo su una sola riga */
+}
+
+/* Hover / active */
+.menu-nav a:hover {
+  background: #f9e0b4;
+  border-color: #e7c48f;
+  color: #2c3e50;
+}
+.menu-nav a.active {
+  background: #fff7e6;
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+/* Ombre laterali decorative (pseudo-elementi) */
 .menu-nav::before,
 .menu-nav::after {
   content: "";
-  position: sticky;
+  position: absolute;       /* absolute dentro .menu-nav (che è relativo/sticky) */
   top: 0;
-  width: 30px;
   height: 100%;
+  width: 28px;
   pointer-events: none;
-  z-index: 11;
+  z-index: 998;
 }
 
 .menu-nav::before {
@@ -72,48 +121,17 @@ body {
   background: linear-gradient(to left, rgba(255,255,255,1) 10%, rgba(255,255,255,0));
 }
 
-
-.menu-nav ul {
-  display: flex;
-  flex-wrap: nowrap;          /* impedisce di andare a capo */
-  gap: 1rem;
-  list-style: none;
-  padding: 0.8rem 1rem;
-  margin: 0;
-  border-bottom: 3px solid #f0d4a1;
-  justify-content: flex-start;
+/* Mobile / small screens: manteniamo SEMPRE una sola riga, ma rendiamo il padding più piccolo */
+@media (max-width: 600px) {
+  .menu-nav ul {
+    padding: 0.4rem 0.6rem;
+    gap: 0.6rem;
+  }
+  .menu-nav a {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.95rem;
+  }
 }
-
-.menu-nav li {
-  flex: 0 0 auto;             /* ogni tab mantiene la sua larghezza */
-}
-
-.menu-nav a {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  background: #fff;
-  border: 2px solid transparent;
-  border-radius: 8px 8px 0 0;
-  text-decoration: none;
-  color: #c0392b;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  white-space: nowrap;        /* impedisce il ritorno a capo */
-}
-
-/* Effetto hover e attivo */
-.menu-nav a:hover {
-  background: #f9e0b4;
-  border-color: #e7c48f;
-  color: #2c3e50;
-}
-
-.menu-nav a.active {
-  background: #fff7e6;
-  border-color: #c0392b;
-  color: #c0392b;
-}
-
 
 /* MENU GENERALE */
 .menu {
@@ -195,25 +213,11 @@ body {
   border-top: 2px solid #e7c48f;
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .menu-nav ul {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  /* Mantiene 2 colonne anche su mobile */
-  .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .menu-item {
-    padding: 1.2rem;
-  }
-}
-
 /* Evita che il titolo di sezione venga coperto dalla navbar sticky */
 section {
   scroll-margin-top: 90px; /* altezza della navbar + un po' di spazio */
 }
 
+html {
+  scroll-behavior: smooth;
+}
