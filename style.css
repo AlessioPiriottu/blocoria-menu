@@ -33,30 +33,80 @@ body {
   color: #555;
 }
 
-/* NAVBAR */
+/* NAVBAR - stile tab orizzontali */
 .menu-nav {
   background: #fff;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   position: sticky;
   top: 0;
   z-index: 10;
-}
-.menu-nav ul {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  list-style: none;
 }
+
+.menu-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  border-bottom: 3px solid #f0d4a1;
+  padding: 0.5rem 1rem;
+}
+
+.menu-nav li {
+  margin: 0;
+}
+
 .menu-nav a {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 8px 8px 0 0;
   text-decoration: none;
   color: #c0392b;
   font-weight: 600;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
+
+/* Effetto hover e "tab" attivo */
 .menu-nav a:hover {
-  color: #27ae60;
+  background: #f9e0b4;
+  border-color: #e7c48f;
+  color: #2c3e50;
 }
+
+.menu-nav a:active,
+.menu-nav a:focus {
+  background: #fff7e6;
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .menu-nav {
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .menu-nav ul {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  .menu-nav a {
+    white-space: nowrap;
+  }
+}
+
+/* Tab attiva */
+.menu-nav a.active {
+  background: #fff7e6;
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
 
 /* MENU GENERALE */
 .menu {

@@ -2,14 +2,16 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pizzeria Blocoria</title>
+  <title>Pizzeria Bobrano</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
-    <img src="favicon.ico" alt="Logo Pizzeria Blocoria" class="logo">
-    <h1>Pizzeria Blocoria</h1>
+    <img src="favicon.ico" alt="Logo Pizzeria Bobrano" class="logo">
+    <h1>Pizzeria Bobrano</h1>
     <p>Via Manzoni 19, Bono</p>
   </header>
 
@@ -51,13 +53,21 @@
         <p class="description">Pomodoro, mozzarella, melanzane e zucchine grigliate.</p>
       </div>
 
-      <div class="menu-item">
-        <div class="item-header">
-          <h3>Zia Rita</h3>
-          <!--          <span class="price">€8.00</span>-->
+        <div class="menu-item">
+          <div class="item-header">
+            <h3>Zia Rita</h3>
+            <!--          <span class="price">€8.00</span>-->
+          </div>
+          <p class="description">Pomodoro, mozzarella, salsiccia e gorgonzola.</p>
         </div>
-        <p class="description">Pomodoro, mozzarella, salsiccia e gorgonzola.</p>
-      </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <h3>Funghi e gorgonzola</h3>
+            <!--          <span class="price">€8.00</span>-->
+          </div>
+          <p class="description">Pomodoro, mozzarella, funghi freschi e gorgonzola.</p>
+        </div>
 
       <div class="menu-item">
         <div class="item-header">
@@ -72,7 +82,7 @@
           <h3>Primavera</h3>
           <!--          <span class="price">€8.00</span>-->
         </div>
-        <p class="description">Pomodoro, mozzarella, .</p>
+        <p class="description">Pomodoro, mozzarella, prosciutto crudo, rucola, scaglie di grana.</p>
       </div>
 
       <div class="menu-item">
@@ -165,7 +175,7 @@
           <h3>Estiva</h3>
 <!--          <span class="price">€8.00</span>-->
         </div>
-        <p class="description">Mozzarella fresca, pomodori a fette, maionese artigianale, rucola.</p>
+        <p class="description">Mozzarella, pomodori a fette, maionese artigianale, rucola.</p>
       </div>
 
       <div class="menu-item">
@@ -208,8 +218,8 @@
     <section id="ingredienti">
       <h2>Ingredienti</h2>
       Molti degli ingredienti utilizzati per il condimento delle pizze provengono dalla produzione
-      locale dell'orto di Gianni a Nurcoro. I pomodori, con cui viene realizzata la passata delle pizzze classiche
-      oppure tagliati a fette sono un ottimo condimento delle pizze ripene, le melanzane, le zucchine con i loro fiori,
+      locale dell'orto di Gianni a Nurcoro. La passata di pomodoro delle pizze classiche,
+      i pomodori tagliati a fette delle pizze ripene, le melanzane, le zucchine con i loro fiori,
       i peperoni, le cipolle, l'insalata verde, il radicchio, le patate provengono tutti dall'orto di Nurcoro.
       I pomodorini, la rucola e il basilico provengono dall'orto della casa a km 0.
 
@@ -217,7 +227,42 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2025 Pizzeria Blocoria — Via Manzoni 19, Bono</p>
+    <p>© 2025 Pizzeria Bobrano — Alessio Piriottu, CEO delle pizze</p>
   </footer>
+
+  <script>
+    // Evidenzia la tab attiva in base alla sezione visualizzata
+    const navLinks = document.querySelectorAll('.menu-nav a');
+
+    function setActiveTab() {
+      let current = '';
+      document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', setActiveTab);
+    window.addEventListener('load', setActiveTab);
+
+    // Evidenzia anche subito quando clicchi
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+  </script>
+
 </body>
 </html>
+
