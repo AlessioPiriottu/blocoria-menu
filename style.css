@@ -109,7 +109,7 @@ body {
   background: linear-gradient(to left, rgba(255,255,255,1) 10%, rgba(255,255,255,0));
 }
 
-/* Mobile / small screens: manteniamo SEMPRE una sola riga, ma rendiamo il padding più piccolo */
+/* Mantiene 2 colonne anche su schermi piccoli */
 @media (max-width: 600px) {
   .menu-nav ul {
     padding: 0.4rem 0.6rem;
@@ -208,4 +208,17 @@ section {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* --- FIX LAYOUT A 2 COLONNE SU MOBILE --- */
+@media (max-width: 600px) {
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem;
+  }
+
+  .menu-item {
+    padding: 1rem;
+  }
 }
